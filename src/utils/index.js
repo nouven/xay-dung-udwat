@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken'
 import nodemailer from 'nodemailer'
 
-const generateToken = (payload, secretKey, expiresIn) => {
+export const generateToken = (payload, secretKey, expiresIn) => {
   return jwt.sign(payload, secretKey, { expiresIn })
 }
 
-const sendMail = async (payload, subject, to) => {
+export const sendMail = async (payload, subject, to) => {
   let transpoter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -22,5 +22,4 @@ const sendMail = async (payload, subject, to) => {
   console.log(info)
 }
 
-export { generateToken, sendMail }
 
