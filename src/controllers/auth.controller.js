@@ -33,7 +33,22 @@ export default {
     }
   },
 
-  resetPassword: (req, res) => {
-
+  changePassword: async(req, res) => {
+    let {_id, username} = req.info
+    let {oldpassword,newpassword} = req.body
+    try{
+      let user = await User.findOne({_id})
+      console.log(user)
+      let check = await bcrypt.compare(oldpassword, user.password)
+      if(check){
+        let salt = await bcrypt.genSalt(10)
+        let password = await bcrypt.hash(newpassword, salt)
+        User.updateOne({_id}, {password}).exec()
+        return res.status(200).json({message:'successfully!!'})
+      }
+    }
+    catch(error){
+      return res.status(500).json(error)
+    }
   }
 }

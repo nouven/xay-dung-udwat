@@ -2,13 +2,13 @@
 import express from 'express'
 import userController from '../controllers/user.controller.js'
 import authController from '../controllers/auth.controller.js'
-import {registerValidate, loginValidate}  from '../middleware/validate.js'
+import {verifyToken} from '../middleware/index.js'
+import {registerValidate, loginValidate, changePasswordValidate}  from '../middleware/validate.js'
 const router = express.Router()
 
 router.post('/register',registerValidate, authController.register)
 router.post('/login',loginValidate, authController.login)
-router.post('/resetpassword',loginValidate, authController.login)
-
-
+router.post('/reset-password',loginValidate, authController.login)
+router.post('/change-password',verifyToken,changePasswordValidate, authController.changePassword)
 
 export default router

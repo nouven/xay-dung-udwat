@@ -28,5 +28,18 @@ export const loginValidate = (req, res, next) => {
   }
 }
 
+export const changePasswordValidate = (req, res, next) =>{
+  let schema = joi.object({
+    oldpassword: joi.string().required(),
+    newpassword: joi.string().min(7).required(),
+    confirmpassword: joi.ref('newpassword')
+  })
+  let result = schema.validate(req.body);
+  if(result.error){
+    return res.status(422).json(result.error.details[0].message)
+  }else{
+    next()
+  }
+}
 
 

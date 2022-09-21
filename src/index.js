@@ -12,11 +12,10 @@ mongoose.connect(process.env.MONGODB_URL)
   })
   .catch(error => console.log(error))
 
-
-
 function main() {
   const app = express()
   app.use(express.json())
+  //app.get('/ping ', (req, res, next) => req.)
 
   app.use('/user', userRoute)
   app.use('/auth', authRoute)
@@ -24,6 +23,5 @@ function main() {
     console.log(`app is runing!!`)
   })
 }
-
 
 
