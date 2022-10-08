@@ -7,12 +7,13 @@ export const generateToken = (payload, secretKey, expiresIn) => {
 
 export const sendMail = async (payload, subject, to) => {
   let transpoter = nodemailer.createTransport({
-    service: "gmail",
+    service: 'gmail',
     auth: {
       user: process.env.usermail,
       pass: process.env.passmail,
-    }
+    },
   })
+
   let info = await transpoter.sendMail({
     from: process.env.usermail,
     to: to,
@@ -21,5 +22,3 @@ export const sendMail = async (payload, subject, to) => {
   })
   console.log(info)
 }
-
-

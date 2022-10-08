@@ -1,10 +1,13 @@
-import { useState } from 'react'
-import Input from '../components/Input'
+import { useContext, useState } from 'react'
+import Input from '../../components/Input'
 import { Link, useNavigate } from 'react-router-dom'
-import { register } from '../api'
+import { register } from '../../api'
+import { AiFillCloseCircle } from 'react-icons/ai'
+import { authContext } from '../../contexts/authContext'
 
-export default function Register() {
+export default function NewUser() {
   let navigate = useNavigate()
+  let { setModal } = useContext(authContext)
   let [values, setValues] = useState({
     username: '',
     email: '',
@@ -63,43 +66,42 @@ export default function Register() {
         username: values.username,
         email: values.email,
         password: values.password,
-        roles: 3,
+        roles: 2,
       }).then((data) => {
         console.log(data)
-        navigate('/login')
       })
     } else {
       console.log('miss pattern!!')
     }
   }
+  let handleCloseModal = () => {
+    setModal((prev) => {
+      return { toggle: false, modal: null }
+    })
+  }
   return (
-    <div className='h-screen w-screen flex justify-center items-center'>
-      <div className='relative flex flex-col gap-2 px-4 rounded-md py-12 border border-black select-none'>
-        <div className='absolute top-0 left-1/2 rounded-md -translate-x-1/2 -translate-y-1/2 p-2 border border-black text-2xl font-bold bg-white'>
-          Register
-        </div>
+    <div className='relative w-[500px] flex justify-center items-center bg-white py-4'>
+      <div
+        onClick={() => handleCloseModal()}
+        className='absolute -top-2 -right-2 rounded-full text-2xl bg-white text-red-500 cursor-pointer'
+      >
+        <AiFillCloseCircle />
+      </div>
+      <div className='relative flex flex-col gap-2 px-2 select-none'>
         {inputs.map((input) => {
           return (
-            <Input
-              key={input.id}
-              props={input}
-              fromParent={{ values, setValues }}
-            />
+            <div key={input.id} className='border-b'>
+              <Input props={input} fromParent={{ values, setValues }} />
+            </div>
           )
         })}
         <div className='flex justify-end gap-4'>
           <button
             onClick={() => handleSubmit()}
-            className='px-4 py-1 border border-black rounded-md'
+            className='px-4 py-1 border border-black'
           >
-            signup
+            Create
           </button>
-        </div>
-        <div className='flex justify-end items-center '>
-          you have already an account ? &nbsp;
-          <Link className='underline' to='/login'>
-            Login
-          </Link>
         </div>
       </div>
     </div>

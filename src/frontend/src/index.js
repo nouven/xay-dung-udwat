@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Register from './pages/Register';
-import Login from './pages/Login';
 import App from './App'
+import AuthContextProvider from './contexts/authContext';
+import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <App/>
-  //<Login />
+  <BrowserRouter>
+    <AuthContextProvider>
+      <App/>
+    </AuthContextProvider>
+  </BrowserRouter>
 );
 

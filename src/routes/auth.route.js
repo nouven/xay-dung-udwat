@@ -8,6 +8,7 @@ const router = express.Router()
 
 router.post('/register',registerValidate, authController.register)
 router.post('/login',loginValidate, authController.login)
+router.post('/info',verifyToken, authController.getInfo)
 router.post('/reset-password',loginValidate, authController.login)
 router.post('/change-password',verifyToken,changePasswordValidate, authController.changePassword)
 
