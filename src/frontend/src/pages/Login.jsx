@@ -64,7 +64,7 @@ export default function Login() {
     }
   }
   return (
-    <div className='flex justify-center items-center h-screen w-screen'>
+    <div className='flex justify-center items-center h-full '>
       <div className='relative flex flex-col rounded-md gap-2 px-4 py-12 border border-black select-none'>
         <div className='absolute rounded-md top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 border border-black text-2xl font-bold bg-white'>
           Login

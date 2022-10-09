@@ -5,6 +5,7 @@ import mongoose from 'mongoose'
 import userRoute from './routes/user.route.js'
 import authRoute from './routes/auth.route.js'
 import surveyRoute from './routes/survey.route.js'
+import questionRoute from './routes/question.route.js'
 
 dotenv.config()
 
@@ -23,6 +24,7 @@ function main() {
   app.use('/user', userRoute)
   app.use('/auth', authRoute)
   app.use('/survey', surveyRoute)
+  app.use('/question', questionRoute)
 
   app.listen(process.env.PORT, () => {
     console.log(`app is runing!!`)

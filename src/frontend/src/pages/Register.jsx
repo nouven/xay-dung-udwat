@@ -42,7 +42,7 @@ export default function Register() {
     {
       id: 4,
       label: 'Confirm pw',
-      type: 'text',
+      type: 'password',
       name: 'confirmpw',
       errorMsg: 'confirm password',
       required: true,
@@ -73,7 +73,7 @@ export default function Register() {
     }
   }
   return (
-    <div className='h-screen w-screen flex justify-center items-center'>
+    <div className='h-full w-screen flex justify-center items-center'>
       <div className='relative flex flex-col gap-2 px-4 rounded-md py-12 border border-black select-none'>
         <div className='absolute top-0 left-1/2 rounded-md -translate-x-1/2 -translate-y-1/2 p-2 border border-black text-2xl font-bold bg-white'>
           Register

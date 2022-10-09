@@ -38,7 +38,7 @@ export default function Home() {
           )
         })}
       </div>
-      <div className='flex-1'>
+      <div className='flex-1 h-full'>
         <Outlet />
       </div>
     </div>

@@ -4,9 +4,15 @@ let surveySchema = new Schema({
   title: {
     type: String,
   },
-  participant: {
-    type: Number,
-    default: 0,
+  ownerid: {
+    type: String,
+  },
+  ownername: {
+    type: String,
+  },
+  isconfirmed: {
+    type: Boolean,
+    default: false,
   },
 })
 

@@ -1,17 +1,13 @@
 import { Router } from 'express'
-import Survey from '../models/survey.model.js'
+import surveyController from '../controllers/survey.controller.js'
+import { verifyToken } from '../middleware/index.js'
 
 const router = Router()
-router.get('/', (req, res) => {
-  res.json({ message: 'survey route!!' })
-})
-router.post('/', (req, res) => {
-  let { title } = req.body
-  Survey({
-    title,
-  })
-    .save()
-    .then((result) => res.json(result))
-    .catch((error) => res.json(error))
-})
+
+router.post('/', verifyToken, surveyController.createSurvey)
+router.get('/', verifyToken, surveyController.getAllSurvey)
+router.put('/', verifyToken, surveyController.confirmSurvey)
+router.get('/by_userid', verifyToken, surveyController.getAllSurveyByUserid)
+router.get('/search', verifyToken, surveyController.searchSurvey)
+
 export default router

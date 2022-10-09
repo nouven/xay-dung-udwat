@@ -16,6 +16,7 @@ import MySurvey from './pages/Home/MySurvey'
 import Setting from './pages/Home/Setting'
 import BadPage from './pages/Badpage'
 import Subadmin from './pages/Subadmin'
+import { FiLogOut } from 'react-icons/fi'
 
 export default function App() {
   let { currentUser, modal, setModal, logout } = useContext(authContext)
@@ -43,8 +44,10 @@ export default function App() {
             {modal.modal}
           </div>
         )}
-        <div onClick={logout} className='text-red-500 border border-black'>
-          nouven
+        <div className='flex justify-center py-2 items-center gap-4 border pr-12 text-xl'>
+          <p>Đỗ Quý Nguyễn</p>
+          <p>AT150542</p>
+          <FiLogOut onClick={logout} className='cursor-pointer' />
         </div>
         <div className='flex-1'>{children}</div>
       </div>
