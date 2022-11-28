@@ -17,7 +17,8 @@ export default function Register() {
       label: 'Username',
       type: 'text',
       name: 'username',
-      errorMsg: 'error',
+      errorMsg:
+        "Username should be 3-15 characters and shouldn't include any special character",
       required: true,
       pattern: '[a-zA-Z]{2,15}',
     },
@@ -26,25 +27,28 @@ export default function Register() {
       label: 'Email',
       type: 'text',
       name: 'email',
-      errorMsg: 'error',
+      errorMsg: 'it should be a valid email address',
       required: true,
-      pattern: '[0-9a-zA-Z]+@[0-9a-zA-Z]+(.[0-9a-zA-Z]+)+',
+      pattern: '[0-9a-zA-Z]+[.]*[0-9a-zA-Z]+@[0-9a-zA-Z]+(.[0-9a-zA-Z]+)+',
     },
     {
       id: 3,
       label: 'Password',
       type: 'password',
       name: 'password',
-      errorMsg: 'error',
       required: true,
       pattern: 'qwe@123',
+      errorMsg:
+        'Password should be 7-20 characters and include at least 1 letter, 1 number and 1 special character!',
+      pattern:
+        '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,20}$',
     },
     {
       id: 4,
       label: 'Confirm pw',
       type: 'password',
       name: 'confirmpw',
-      errorMsg: 'confirm password',
+      errorMsg: "Password don't match",
       required: true,
       pattern: 'qwe@123',
     },
@@ -74,7 +78,7 @@ export default function Register() {
   }
   return (
     <div className='h-full w-screen flex justify-center items-center'>
-      <div className='relative flex flex-col gap-2 px-4 rounded-md py-12 border border-black select-none'>
+      <div className='relative flex flex-col w-[500px] gap-2 px-4 rounded-md py-12 border border-black select-none'>
         <div className='absolute top-0 left-1/2 rounded-md -translate-x-1/2 -translate-y-1/2 p-2 border border-black text-2xl font-bold bg-white'>
           Register
         </div>

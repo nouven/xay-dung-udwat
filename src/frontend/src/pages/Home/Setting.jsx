@@ -53,16 +53,17 @@ export default function Setting() {
           required: true,
           name: 'password',
           placeholder: 'Password',
-          pattern: 'nouven',
-          errorMsg: 'error message',
+          errorMsg:
+            'Password should be 7-20 characters and include at least 1 letter, 1 number and 1 special character!',
+          pattern:
+            '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,20}$',
         },
         {
           id: 2,
           required: true,
           name: 'confirmpassword',
           placeholder: 'Confirm password ',
-          pattern: 'nouven',
-          errorMsg: 'error message',
+          errorMsg: "Password don't match",
         },
       ],
     },
@@ -82,6 +83,12 @@ export default function Setting() {
       fieldname = 'email'
     } else if (id === 3) {
       fieldname = 'password'
+      let regex = new RegExp(arr[2].inputs[0].pattern)
+      let check = regex.test(values.password)
+      if (!check) {
+        console.log(check)
+        return
+      }
       if (values.password !== values.confirmpassword) {
         console.log('passwords does not match!')
         return

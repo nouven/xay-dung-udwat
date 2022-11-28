@@ -17,6 +17,8 @@ import Setting from './pages/Home/Setting'
 import BadPage from './pages/Badpage'
 import Subadmin from './pages/Subadmin'
 import { FiLogOut } from 'react-icons/fi'
+import ForgotPassword from './pages/ForgotPassword'
+import ForgotPassword2 from './pages/ForgotPassword/ForgotPassword2'
 
 export default function App() {
   let { currentUser, modal, setModal, logout } = useContext(authContext)
@@ -58,6 +60,8 @@ export default function App() {
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/forgot-password/:token' element={<ForgotPassword2 />} />
         <Route path='*' element={<BadPage />} />
         <Route
           path='/admin'

@@ -1,15 +1,25 @@
-
 import express from 'express'
 import userController from '../controllers/user.controller.js'
 import authController from '../controllers/auth.controller.js'
-import {verifyToken} from '../middleware/index.js'
-import {registerValidate, loginValidate, changePasswordValidate}  from '../middleware/validate.js'
+import { verifyToken } from '../middleware/index.js'
+import {
+  registerValidate,
+  loginValidate,
+  changePasswordValidate,
+} from '../middleware/validate.js'
 const router = express.Router()
 
-router.post('/register',registerValidate, authController.register)
-router.post('/login',loginValidate, authController.login)
-router.post('/info',verifyToken, authController.getInfo)
-router.post('/reset-password',loginValidate, authController.login)
-router.post('/change-password',verifyToken,changePasswordValidate, authController.changePassword)
+router.post('/register', registerValidate, authController.register)
+router.post('/login', loginValidate, authController.login)
+router.post('/info', verifyToken, authController.getInfo)
+router.post('/reset-password', loginValidate, authController.login)
+router.post(
+  '/change-password',
+  verifyToken,
+  changePasswordValidate,
+  authController.changePassword
+)
+router.post('/forgot-password', authController.forgotPasswor)
+router.post('/forgot-password/:token', authController.verifyTokenForgotPassword)
 
 export default router

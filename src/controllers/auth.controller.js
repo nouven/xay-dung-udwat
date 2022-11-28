@@ -1,6 +1,8 @@
 import User from '../models/user.model.js'
 import bcrypt from 'bcrypt'
-import { generateToken } from '../utils/index.js'
+import { generateToken, sendMail } from '../utils/index.js'
+import { verifyToken } from '../middleware/index.js'
+import jwt from 'jsonwebtoken'
 export default {
   register: async (req, res) => {
     let { username, password, email, roles } = req.body
@@ -71,6 +73,40 @@ export default {
         { username: 1, email: 1, roles: 1 }
       )
       return res.status(200).json(user)
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  },
+  forgotPasswor: async (req, res) => {
+    try {
+      let { email } = req.body
+      const user = await User.findOne({ email })
+      if (!user) {
+        return res.status(404).json({ message: 'email not found' })
+      }
+      const token = generateToken(
+        { _id: user._id, email: user.email },
+        process.env.ACCESS_TOKEN_KEY,
+        '1h'
+      )
+      let url = `<a href='http://localhost:3000/forgot-password/${token}'>click to reset password</a>`
+
+      let isSend = await sendMail(url, 'Forgot Password', user.email)
+      res.json(isSend)
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  },
+  verifyTokenForgotPassword: async (req, res) => {
+    try {
+      let { token } = req.params
+      let { password } = req.body
+      console.log(password)
+      let payload = jwt.verify(token, process.env.ACCESS_TOKEN_KEY)
+      let salt = await bcrypt.genSalt(10)
+      password = await bcrypt.hash(password, salt)
+      await User.updateOne({ _id: payload._id }, { password }).exec()
+      return res.status(200).json({ status: 200, message: 'updated!' })
     } catch (error) {
       return res.status(500).json(error)
     }

@@ -87,9 +87,11 @@ export default function Login() {
           </button>
         </div>
         <div className='flex flex-col items-end gap-2 pt-3'>
-          <button className='underline hover:text-red-500'>
-            forgot password?
-          </button>
+          <Link to='/forgot-password'>
+            <button className='underline hover:text-red-500'>
+              forgot password?
+            </button>
+          </Link>
           <button className=''>
             create new account ?
             <Link className='underline hover:text-red-500' to='/register'>

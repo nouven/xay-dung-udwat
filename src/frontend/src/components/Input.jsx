@@ -9,7 +9,7 @@ export default function Input({ props, fromParent }) {
   return (
     <div className='flex'>
       <label className='w-[100px]'>{label}</label>
-      <div className='flex flex-col '>
+      <div className='flex flex-col flex-1'>
         <input
           {...others}
           onChange={(e) => handleChangeInput(e)}

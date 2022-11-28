@@ -159,3 +159,25 @@ export const getAllQuestionBySurveyid = async ({ surveyid }) => {
   })
   return data.data
 }
+
+export const forgotPassword = async ({ email }) => {
+  let data = await axios({
+    method: 'post',
+    url: `${baseUrl}/auth/forgot-password/`,
+    data: {
+      email,
+    },
+  })
+  return data.data
+}
+
+export const verifyTokenForgotPassword = async ({ token, password }) => {
+  let data = await axios({
+    method: 'post',
+    url: `${baseUrl}/auth/forgot-password/${token}`,
+    data: {
+      password,
+    },
+  })
+  return data.data
+}

@@ -40,7 +40,8 @@ export default function NewUser() {
       name: 'password',
       errorMsg: 'error',
       required: true,
-      pattern: 'qwe@123',
+      pattern:
+        '^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,20}$',
     },
     {
       id: 4,
@@ -49,9 +50,9 @@ export default function NewUser() {
       name: 'confirmpw',
       errorMsg: 'confirm password',
       required: true,
-      pattern: 'qwe@123',
     },
   ]
+
   let handleSubmit = () => {
     let isSubmit = true
     inputs.forEach((input) => {
